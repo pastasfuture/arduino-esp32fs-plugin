@@ -316,11 +316,14 @@ public class ESP32FS implements Tool {
     System.out.println("Start: 0x" + String.format("%x", spiStart));
     System.out.println("Size : 0x" + String.format("%x", spiSize));
 
-    File tool = new File(platform.getFolder() + "/tools", mkspiffsCmd);
+    File tool = new File(platform.getFolder(), mkspiffsCmd);
+    System.out.println(platform.getFolder());
     if (!tool.exists() || !tool.isFile()) {
-      tool = new File(platform.getFolder() + "/tools/mk" + typefs.toLowerCase(), mkspiffsCmd);
+      tool = new File(platform.getFolder() + "/mk" + typefs.toLowerCase(), mkspiffsCmd);
+      System.out.println(platform.getFolder() + "/mk" + typefs.toLowerCase());
       if (!tool.exists()) {
         tool = new File(PreferencesData.get("runtime.tools.mk" + typefs.toLowerCase() + ".path"), mkspiffsCmd);
+        System.out.println(PreferencesData.get("runtime.tools.mk" + typefs.toLowerCase() + ".path"));
         if (!tool.exists()) {
             System.err.println();
             editor.statusError(typefs + " Error: mk" + typefs.toLowerCase() + "not found!");
